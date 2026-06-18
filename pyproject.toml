@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ps2-dwarf1"
+version = "0.1.0"
+description = "Extract and import DWARF v1 debug data from PlayStation 2 ELF32/MIPS executables."
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = []
+keywords = ["playstation-2", "ps2", "dwarf", "elf", "ghidra", "reverse-engineering"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Software Development :: Debuggers",
+    "Topic :: Utilities",
+]
+
+[project.scripts]
+ps2-dwarf1-extract = "extract:main"
+ps2-dwarf1-analyze = "analyze:main"
+ps2-dwarf1-srctree = "srctree:main"
+ps2-dwarf1-samples = "dump_samples:main"
+
+[tool.setuptools]
+py-modules = ["extract", "analyze", "srctree", "dump_samples"]
+
+[tool.setuptools.packages.find]
+include = ["ps2dwarf1*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100

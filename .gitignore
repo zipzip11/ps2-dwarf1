@@ -1,0 +1,28 @@
+# Python bytecode and local tooling
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Extracted models and local analysis output
+out/
+*.dwarf1.model.json
+*.dwarf1.summary.json
+*.dwarf1.srctree.json
+
+# Avoid publishing proprietary game/media inputs by accident.
+*.elf
+*.ELF
+*.iso
+*.ISO
+*.bin
+*.cue
