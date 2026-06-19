@@ -135,7 +135,7 @@ def build_model(
                 }
             )
             members: List[Dict[str, Any]] = rec["members"]
-            for child_index in child_indices(dies, index):
+            for child_index in child_indices(dies, index, off_to_index):
                 child = dies[child_index]
                 if child.tag != T_MEMBER:
                     continue
@@ -182,7 +182,7 @@ def build_model(
 
         elif die.tag == T_SUBROUTINE_TYPE:
             params = []
-            for child_index in child_indices(dies, index):
+            for child_index in child_indices(dies, index, off_to_index):
                 child = dies[child_index]
                 if child.tag == T_FORMAL_PARAM:
                     params.append(type_ref(child.attrs, elf.endian))
@@ -215,7 +215,7 @@ def build_model(
         elif die.tag in (T_GLOBAL_SUBROUTINE, T_SUBROUTINE) and name and die.attr(A_LOW_PC) is not None:
             params = []
             locals_ = []
-            for child_index in child_indices(dies, index):
+            for child_index in child_indices(dies, index, off_to_index):
                 child = dies[child_index]
                 child_name = _str_or_none(child.attr(A_NAME))
                 if child.tag == T_FORMAL_PARAM and child_name:

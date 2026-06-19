@@ -283,13 +283,18 @@ def read_attribute(blob: bytes, offset: int, endian: str, address_size: int = 4)
     return Attribute(name, form, value, start), offset
 
 
-def child_indices(dies: List[Die], index: int) -> List[int]:
+def child_indices(
+    dies: List[Die],
+    index: int,
+    off_to_index: Optional[Dict[int, int]] = None,
+) -> List[int]:
     """Return direct child DIE indices using DWARF1 AT_sibling spans."""
 
     sibling = dies[index].attr(A_SIBLING)
     if sibling is None or sibling <= dies[index].offset:
         return []
-    off_to_index = {die.offset: i for i, die in enumerate(dies)}
+    if off_to_index is None:
+        off_to_index = {die.offset: i for i, die in enumerate(dies)}
     out: List[int] = []
     j = index + 1
     while j < len(dies):
